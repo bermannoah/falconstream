@@ -211,6 +211,7 @@ func (x *s3Emitter) reUploadWithNewIdentifier(raw []byte, ev *falconEvent) error
 	if oopsie != nil {
 		return errors.Wrapf(oopsie, "Fail to upload object: %s", s3PathNew)
 	}
+	Logger.WithField("s3PathNew", s3PathNew).Trace("New version of object uploaded...")
 	return nil
 }
 
@@ -227,6 +228,7 @@ func (x *s3Emitter) emit(ev *falconEvent) error {
 	}
 
 	if !exists {
+		Logger.WithField("s3path", s3Path).Trace("Attempting to replace object...")
 		err := x.handleSuccessfulUpload(s3Key, s3Path, raw)
 		if err != nil {
 			return errors.Wrapf(err, "Fail to upload object: %s", s3Path)
@@ -239,7 +241,7 @@ func (x *s3Emitter) emit(ev *falconEvent) error {
 			}
 		}
 	} else {
-		Logger.WithField("s3path", s3Path).Trace("Object already exists and could not be replaced")
+		Logger.WithField("s3path", s3Path).Trace("Object exists already and could not be replaced")
 	}
 
 	return nil
