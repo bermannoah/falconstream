@@ -1,5 +1,7 @@
 # FalconStream
 
+⚠️ Archiving this. If you need updates to this repo, either fork it, or shoot me a message and I'll see if there's something we can provide. ⚠️
+
 `falconstream` is event forwarder of CrowdStrike Falcon. CrowdStrike Falcon has Event Stream API and the API provides events regarding audit, malware detection and so on. `falconstream` receives the events continuously and can store them to local file system or Amazon S3. (Also Amazon Kinesis Data Firehose is planned to implement)
 
 ## Architecture
